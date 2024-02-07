@@ -6,8 +6,9 @@ export default {
     name: 'AppHeader',
     components: { HeaderTitle, SearchForm },
     methods: {
+        //* Method triggered when search form emit 'search' event
         submitForm(searchQuery) {
-
+            //* Emit 'search' event with search query as payload
             this.$emit('search', searchQuery);
         }
     }
@@ -15,8 +16,11 @@ export default {
 </script>
 
 <template>
+    <!-- Header section -->
     <header>
+        <!-- Render HeaderTitle component -->
         <HeaderTitle />
+        <!-- Render SearchForm component and listen for 'search' event -->
         <SearchForm @search="submitForm" />
     </header>
 </template>

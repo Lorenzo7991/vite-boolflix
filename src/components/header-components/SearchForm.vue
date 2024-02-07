@@ -2,10 +2,13 @@
 export default {
   name: 'SearchForm',
   data: () => ({
+    //* Data property to store searched query
     searchQuery: ''
   }),
   methods: {
+    //* Method triggered when form submitted
     submitForm() {
+      //* Emit 'search' event with search query as payload
       this.$emit('search', this.searchQuery);
     }
   }
@@ -13,8 +16,11 @@ export default {
 </script>
 
 <template>
+  <!-- Search form -->
   <form id="form" class="search-form" @submit.prevent="submitForm">
+    <!-- Input field for entering search query -->
     <input v-model="searchQuery" type="text" placeholder="Search..." class="search-input">
+    <!-- Button form submit-->
     <button type="submit" class="search-button">Search</button>
   </form>
 </template>
