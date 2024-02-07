@@ -1,19 +1,19 @@
 <script>
+import AppHeader from './components/AppHeader.vue';
+
+
 export default {
   name: 'App',
   data: () => ({}),
-  components: {}
+  components: { AppHeader }
 };
 </script>
 
 <template>
-  <div id="test-project" class="text-center mt-5">
-    <h1>Test project</h1>
-    <i class="fa-solid fa-beat fa-4x mt-4 fa-bolt-lightning"></i>
-  </div>
+  <AppHeader />
 </template>
 
-
-<style scoped>
-/* Style here */
+<style lang="scss">
+@use './assets/scss/style.scss';
 </style>
+
