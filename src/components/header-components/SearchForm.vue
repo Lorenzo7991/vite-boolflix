@@ -1,17 +1,23 @@
 <script>
 export default {
   name: 'SearchForm',
-  data: () => ({}),
+  data: () => ({
+    searchQuery: ''
+  }),
+  methods: {
+    submitForm() {
+      this.$emit('search', this.searchQuery);
+    }
+  }
 };
 </script>
 
 <template>
   <form id="form" class="search-form" @submit.prevent="submitForm">
-    <input type="text" placeholder="Search..." class="search-input">
+    <input v-model="searchQuery" type="text" placeholder="Search..." class="search-input">
     <button type="submit" class="search-button">Search</button>
   </form>
 </template>
-
 
 <style scoped>
 .search-form {

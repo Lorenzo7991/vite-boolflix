@@ -1,19 +1,23 @@
 <script>
 import HeaderTitle from './header-components/HeaderTitle.vue';
-import SearchForm from './header-components/SearchForm.vue'
-
+import SearchForm from './header-components/SearchForm.vue';
 
 export default {
     name: 'AppHeader',
-    data: () => ({}),
-    components: { HeaderTitle, SearchForm }
+    components: { HeaderTitle, SearchForm },
+    methods: {
+        submitForm(searchQuery) {
+
+            this.$emit('search', searchQuery);
+        }
+    }
 };
 </script>
 
 <template>
     <header>
         <HeaderTitle />
-        <SearchForm />
+        <SearchForm @search="submitForm" />
     </header>
 </template>
 

@@ -1,9 +1,13 @@
 @use 'vars' as *;
+@use 'generics';
 
+/* Generics */
 body {
+    padding-top: 100px;
     background-color: $custom-gray;
 }
 
+/* Search form componet */
 .title {
     color: $custom-red;
 }
