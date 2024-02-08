@@ -15,14 +15,14 @@ export default {
         }
     },
     methods: {
-        //* Method to transform vote average from decimal to a range from 1 to 5, rounding up
+        //* Metodo per trasformare il voto medio da 0-10 a un intervallo da 1 a 5, mostrando solo il numero intero
         transformVote(voteAverage) {
-            let transformedVote = Math.ceil(voteAverage * 5);
-            transformedVote = Math.min(transformedVote, 5);
-            transformedVote = Math.max(transformedVote, 1);
+            let transformedVote = Math.round(voteAverage / 2 + 0.5);
+            transformedVote = Math.min(Math.max(transformedVote, 1), 5);
             return transformedVote;
         }
     }
+
 };
 </script>
 
@@ -91,10 +91,12 @@ export default {
 #ita-flag img {
     max-height: 20px;
     max-width: 50px;
+    margin: 15px 0;
 }
 
 #eng-flag img {
     max-height: 20px;
     max-width: 50px;
+    margin: 15px 0;
 }
 </style>
