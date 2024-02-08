@@ -10,6 +10,18 @@ export default {
         tvResults: {
             type: Array
         },
+        basePosterPath: {
+            type: String
+        }
+    },
+    methods: {
+        //* Method to transform vote average from decimal to a range from 1 to 5, rounding up
+        transformVote(voteAverage) {
+            let transformedVote = Math.ceil(voteAverage * 5);
+            transformedVote = Math.min(transformedVote, 5);
+            transformedVote = Math.max(transformedVote, 1);
+            return transformedVote;
+        }
     }
 };
 </script>
@@ -34,11 +46,13 @@ export default {
                     <div id="eng-flag" v-else-if="movie.original_language === 'en'">
                         <img src="@/assets/img/en.png" alt="English Flag Image">
                     </div>
-                    <!-- Display generic icon if neither Italian nor English -->
                     <div v-else>
                         <span><strong>Language:</strong> {{ movie.original_language }}</span>
                     </div>
-                    <div><strong>Vote Average:</strong> {{ movie.vote_average }}</div>
+                    <img v-if="movie.poster_path" :src="`${basePosterPath}${movie.poster_path}`" alt="Movie Poster">
+                    <!-- Display placeholder image if poster_path is not present -->
+                    <img v-else src="@/assets/img/placeholder.jpg" alt="Placeholder Image">
+                    <div><strong>Vote Average:</strong> {{ transformVote(movie.vote_average) }}</div>
                 </li>
             </ul>
         </div>
@@ -59,11 +73,14 @@ export default {
                     <div id="eng-flag" v-else-if="show.original_language === 'en'">
                         <img src="@/assets/img/en.png" alt="English Flag Image">
                     </div>
-                    <!-- Display generic icon if neither Italian nor English -->
                     <div v-else>
                         <span><strong>Language:</strong> {{ show.original_language }}</span>
                     </div>
-                    <div><strong>Vote Average:</strong> {{ show.vote_average }}</div>
+                    <!-- Display TV show poster if poster_path is present -->
+                    <img v-if="show.poster_path" :src="`${basePosterPath}${show.poster_path}`" alt="TV Show Poster">
+                    <!-- Display placeholder image if poster_path is not present -->
+                    <img v-else src="@/assets/img/placeholder.jpg" alt="Placeholder Image">
+                    <div><strong>Vote Average:</strong> {{ transformVote(show.vote_average) }}</div>
                 </li>
             </ul>
         </div>

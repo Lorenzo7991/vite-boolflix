@@ -10,33 +10,41 @@ export default {
     //* Initialize empty arrays to store movie and TV show results
     movieResults: [],
     tvResults: [],
+    basePosterPath: api.basePosterPath,
   }),
   components: { AppHeader, AppMain },
   methods: {
     handleSearch(searchQuery) {
-      //* Promise.all to execute both API calls simultaneously
-      Promise.all([
-        axios.get(`${api.baseUri}/search/movie`, {
-          params: {
-            api_key: api.apiKey,
-            query: searchQuery
-          }
-        }),
-        axios.get(`${api.baseUri}/search/tv`, {
-          params: {
-            api_key: api.apiKey,
-            query: searchQuery
-          }
-        })
-      ])
-        .then(([movieResponse, tvResponse]) => {
-          //* Store movie and TV show results
-          this.movieResults = movieResponse.data.results;
-          this.tvResults = tvResponse.data.results;
+      //* API call to search for movies
+      axios.get(`${api.baseUri}/search/movie`, {
+        params: {
+          api_key: api.apiKey,
+          query: searchQuery
+        }
+      })
+        .then(response => {
+          //* Store movie results in data property
+          this.movieResults = response.data.results;
         })
         .catch(error => {
-          //* Log error if API call fails //TODO: manage errors
-          console.log('API call error:', error);
+          //* Log error if API call fails for movies //TODO: manage errors
+          console.log('API call error for movies:', error);
+        });
+
+      //* API call to search for TV shows
+      axios.get(`${api.baseUri}/search/tv`, {
+        params: {
+          api_key: api.apiKey,
+          query: searchQuery
+        }
+      })
+        .then(response => {
+          //* Store TV show results in data property
+          this.tvResults = response.data.results;
+        })
+        .catch(error => {
+          //* Log error if API call fails for TV shows //TODO: manage errors
+          console.log('API call error for TV shows:', error);
         });
     }
   }
@@ -47,7 +55,7 @@ export default {
   <!-- Render AppHeader component and pass handleSearch method as a prop -->
   <AppHeader @search="handleSearch" />
   <!-- Render AppMain component and pass movieResults and tvResults data as props -->
-  <AppMain :movieResults="movieResults" :tvResults="tvResults" />
+  <AppMain :movieResults="movieResults" :tvResults="tvResults" :basePosterPath="basePosterPath" />
 </template>
 
 
