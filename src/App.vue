@@ -1,56 +1,47 @@
 <script>
 import axios from 'axios';
+import { api } from './components/data/index'
 import AppHeader from './components/AppHeader.vue';
 import AppMain from './components/AppMain.vue';
 
 export default {
   name: 'App',
   data: () => ({
-    //** Initialize empty arrays to store movie and TV show results
+    //* Initialize empty arrays to store movie and TV show results
     movieResults: [],
     tvResults: [],
   }),
   components: { AppHeader, AppMain },
   methods: {
     handleSearch(searchQuery) {
-      //* API call to search for movies
-      axios
-        .get('https://api.themoviedb.org/3/search/movie', {
+      //* Promise.all to execute both API calls simultaneously
+      Promise.all([
+        axios.get(`${api.baseUri}/search/movie`, {
           params: {
-            api_key: 'a3cc6271bb5f76a0046a2b13e276b54c',
+            api_key: api.apiKey,
+            query: searchQuery
+          }
+        }),
+        axios.get(`${api.baseUri}/search/tv`, {
+          params: {
+            api_key: api.apiKey,
             query: searchQuery
           }
         })
-        .then(response => {
-          //* Store movie results in data property
-          this.movieResults = response.data.results;
+      ])
+        .then(([movieResponse, tvResponse]) => {
+          //* Store movie and TV show results
+          this.movieResults = movieResponse.data.results;
+          this.tvResults = tvResponse.data.results;
         })
         .catch(error => {
-          //* Log error if API call fails for movies //TODO: manage errors
-          console.log('API call error for movies:', error);
-        });
-
-      //* API call to search for TV shows
-      axios
-        .get('https://api.themoviedb.org/3/search/tv', {
-          params: {
-            api_key: 'a3cc6271bb5f76a0046a2b13e276b54c',
-            query: searchQuery
-          }
-        })
-        .then(response => {
-          //* Store TV show results in data property
-          this.tvResults = response.data.results;
-        })
-        .catch(error => {
-          //* Log error if API call fails for TV shows //TODO: manage errors
-          console.log('API call error for TV shows:', error);
+          //* Log error if API call fails //TODO: manage errors
+          console.log('API call error:', error);
         });
     }
   }
 };
 </script>
-
 
 <template>
   <!-- Render AppHeader component and pass handleSearch method as a prop -->

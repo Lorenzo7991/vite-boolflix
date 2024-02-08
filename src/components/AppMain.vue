@@ -36,7 +36,7 @@ export default {
                     </div>
                     <!-- Display generic icon if neither Italian nor English -->
                     <div v-else>
-                        <span><i class="fa-solid fa-language fa-2x"></i></span>
+                        <span><strong>Language:</strong> {{ movie.original_language }}</span>
                     </div>
                     <div><strong>Vote Average:</strong> {{ movie.vote_average }}</div>
                 </li>
@@ -61,7 +61,7 @@ export default {
                     </div>
                     <!-- Display generic icon if neither Italian nor English -->
                     <div v-else>
-                        <span><i class="fa-solid fa-language fa-2x"></i></span>
+                        <span><strong>Language:</strong> {{ show.original_language }}</span>
                     </div>
                     <div><strong>Vote Average:</strong> {{ show.vote_average }}</div>
                 </li>

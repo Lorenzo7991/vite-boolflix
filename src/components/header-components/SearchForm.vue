@@ -19,7 +19,7 @@ export default {
   <!-- Search form -->
   <form id="form" class="search-form" @submit.prevent="submitForm">
     <!-- Input field for entering search query -->
-    <input v-model="searchQuery" type="text" placeholder="Search..." class="search-input">
+    <input v-model.trim="searchQuery" type="text" placeholder="Search..." class="search-input">
     <!-- Button form submit-->
     <button type="submit" class="search-button">Search</button>
   </form>
