@@ -36,5 +36,6 @@ header {
     align-items: center;
     padding: 0 1rem;
     background-color: black;
+    z-index: 1;
 }
 </style>

@@ -27,11 +27,11 @@ export default {
             //* Create string containing star icons
             let starsHTML = '';
             for (let i = 0; i < fullStars; i++) {
-                starsHTML += '<i class="fas fa-star"></i>';
+                starsHTML += '<i class="fas fa-star text-warning"></i>';
             }
             //* Add empty stars to reach total of 5 stars
             for (let i = fullStars; i < 5; i++) {
-                starsHTML += '<i class="far fa-star"></i>';
+                starsHTML += '<i class="far fa-star text-warning"></i>';
             }
             //* Return the HTML string containing the stars
             return starsHTML;
@@ -63,3 +63,5 @@ export default {
     margin: 15px 0;
 }
 </style>
+
+//TODO: Centralizzare regole di stile componenti figli && Gestire poster_path mancante 
