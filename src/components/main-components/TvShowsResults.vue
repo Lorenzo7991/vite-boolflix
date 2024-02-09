@@ -40,6 +40,3 @@ export default {
 </template>
 
 
-<style scoped>
-/* Style here */
-</style>
