@@ -20,11 +20,11 @@ export default {
         <h2>TV Show Results:</h2>
         <div class="grid">
             <!-- Loop through TV show results -->
-            <div class="item border-bottom border-4 mb-4" v-for="show in tvResults" :key="show.id">
+            <div class="item border-4 mb-4" v-for="show in tvResults" :key="show.id">
                 <div class="poster" v-bind:style="{ 'background-image': getPosterStyle(show.poster_path) }">
                     <div class="info">
                         <div><strong>Title:</strong> {{ show.name }}</div>
-                        <div><strong>Original Title:</strong> {{ show.original_name }}</div>
+                        <div><strong>Original Title:</strong><br /> {{ show.original_name }}</div>
                         <!-- Display Italian flag if original language is Italian -->
                         <div class="flag" v-if="show.original_language === 'it'">
                             <img src="@/assets/img/it.png" alt="Italian Flag Image">
@@ -62,7 +62,7 @@ export default {
 
     .poster {
         width: 100%;
-        height: 400px;
+        height: 450px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -82,10 +82,8 @@ export default {
             transition: opacity 0.3s ease;
         }
 
-        &:hover {
-            .info {
-                opacity: 1;
-            }
+        &:hover .info {
+            opacity: 1;
         }
     }
 }

@@ -63,5 +63,3 @@ export default {
     margin: 15px 0;
 }
 </style>
-
-//TODO: Centralizzare regole di stile componenti figli && Gestire poster_path mancante 
