@@ -15,11 +15,23 @@ export default {
         }
     },
     methods: {
-        //* Metodo per trasformare il voto medio da 0-10 a un intervallo da 1 a 5, mostrando solo il numero intero
+        //* Function to transform the vote average to stars
         transformVote(voteAverage) {
-            let transformedVote = Math.round(voteAverage / 2 + 0.5);
-            transformedVote = Math.min(Math.max(transformedVote, 1), 5);
-            return transformedVote;
+            //*Calculate number of full stars
+            let fullStars = Math.round(voteAverage / 2);
+            //* Create string containing star icons
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fas fa-star"></i>';
+            }
+            //* Add empty stars to reach total of 5 stars
+            for (let i = fullStars; i < 5; i++) {
+                starsHTML += '<i class="far fa-star"></i>';
+            }
+            //* Log the HTML string containing the stars
+            console.log(starsHTML);
+            //* Return the HTML string containing the stars
+            return starsHTML;
         }
     }
 
@@ -33,7 +45,8 @@ export default {
         <!-- Movie Results Section -->
         <div id="movies" class="text-white my-5">
             <h2>Movie Results:</h2>
-            <ul>
+            <!-- Move v-for to ul -->
+            <ul v-if="movieResults.length">
                 <!-- Loop through movie results -->
                 <li class="border-bottom border-4 mb-4" v-for="movie in movieResults" :key="movie.id">
                     <div><strong>Title:</strong> {{ movie.title }}</div>
@@ -52,7 +65,7 @@ export default {
                     <img v-if="movie.poster_path" :src="`${basePosterPath}${movie.poster_path}`" alt="Movie Poster">
                     <!-- Display placeholder image if poster_path is not present -->
                     <img v-else src="@/assets/img/placeholder.jpg" alt="Placeholder Image">
-                    <div><strong>Vote Average:</strong> {{ transformVote(movie.vote_average) }}</div>
+                    <div><strong>Vote Average:</strong> <span v-html="transformVote(movie.vote_average)"></span></div>
                 </li>
             </ul>
         </div>
@@ -60,7 +73,8 @@ export default {
         <!-- TV Show Results Section -->
         <div id="tv-series" class="text-white">
             <h2>TV Show Results:</h2>
-            <ul>
+            <!-- Move v-for to ul -->
+            <ul v-if="tvResults.length">
                 <!-- Loop through TV show results -->
                 <li class="border-bottom border-4 mb-4" v-for="show in tvResults" :key="show.id">
                     <div><strong>Title:</strong> {{ show.name }}</div>
@@ -80,12 +94,13 @@ export default {
                     <img v-if="show.poster_path" :src="`${basePosterPath}${show.poster_path}`" alt="TV Show Poster">
                     <!-- Display placeholder image if poster_path is not present -->
                     <img v-else src="@/assets/img/placeholder.jpg" alt="Placeholder Image">
-                    <div><strong>Vote Average:</strong> {{ transformVote(show.vote_average) }}</div>
+                    <div><strong>Vote Average:</strong> <span v-html="transformVote(show.vote_average)"></span></div>
                 </li>
             </ul>
         </div>
     </div>
 </template>
+
 
 <style scoped>
 #ita-flag img {
