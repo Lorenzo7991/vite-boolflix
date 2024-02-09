@@ -38,8 +38,3 @@ export default {
         </ul>
     </div>
 </template>
-
-
-<style scoped>
-/* Style here */
-</style>

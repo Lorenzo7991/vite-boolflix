@@ -1,7 +1,7 @@
 <script>
 import MovieResults from './main-components/MovieResults.vue';
-import TvShowResults from './main-components/TvShowResults.vue';
-//TODO: Fixare erroe di importazione...?
+import TvShowResults from './main-components/TvShowsResults.vue';
+
 
 export default {
     name: 'AppMain',
@@ -50,7 +50,7 @@ export default {
 </template>
 
 
-<style scoped>
+<style>
 #ita-flag img {
     max-height: 20px;
     max-width: 50px;
